@@ -9,8 +9,8 @@ module "cron" {
 
   environment  = "staging"
   service_name = "service"
-  # group_name   = aws_scheduler_schedule_group.group.name
-  cron_name = "cron"
+  group_name   = aws_scheduler_schedule_group.group.name
+  cron_name    = "cron"
 
   schedule_expression = "rate(30 minutes)"
 
