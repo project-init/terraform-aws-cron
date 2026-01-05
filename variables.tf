@@ -24,6 +24,13 @@ variable "service_name" {
 ### Cron
 ########################################################################################################################
 
+variable "group_name" {
+  type        = string
+  nullable    = true
+  default     = null
+  description = "The group name of the scheduler."
+}
+
 variable "schedule_expression" {
   type        = string
   nullable    = false
@@ -53,6 +60,16 @@ variable "use_ec2" {
   type        = bool
   default     = false
   description = "Whether to deploy the service on an ec2 backed service or fargate."
+}
+
+variable "capacity_providers" {
+  default = []
+  type = set(object({
+    capacity_provider = string
+    base              = number
+    weight            = number
+  }))
+  description = "List of capacity providers to use for distributing tasks. Should primarily be used when utilizing ec2 backed ecs."
 }
 
 ########################################################################################################################
