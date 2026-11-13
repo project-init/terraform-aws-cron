@@ -37,6 +37,13 @@ variable "schedule_expression" {
   description = "The cron schedule expression for the task."
 }
 
+variable "schedule_enabled" {
+  type        = bool
+  nullable    = false
+  default     = true
+  description = "Whether the EventBridge schedule is enabled. Set to false to deploy the role and task without runs."
+}
+
 ########################################################################################################################
 ### ECS Cluster/Service
 ########################################################################################################################

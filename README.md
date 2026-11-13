@@ -18,14 +18,14 @@ Check our [Examples](examples) for full usage information.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.81.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.81.0 |
 
 ## Modules
@@ -35,7 +35,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_cloudwatch_log_group.log-group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_ecs_task_definition.cron](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition) | resource |
 | [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
@@ -57,7 +57,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_capacity_providers"></a> [capacity\_providers](#input\_capacity\_providers) | List of capacity providers to use for distributing tasks. Should primarily be used when utilizing ec2 backed ecs. | <pre>set(object({<br/>    capacity_provider = string<br/>    base              = number<br/>    weight            = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | The cpu value to give to the ecs task. | `number` | `256` | no |
 | <a name="input_cron_name"></a> [cron\_name](#input\_cron\_name) | The name of the cron task. | `string` | n/a | yes |
@@ -67,6 +67,7 @@ No modules.
 | <a name="input_group_name"></a> [group\_name](#input\_group\_name) | The group name of the scheduler. | `string` | `null` | no |
 | <a name="input_image"></a> [image](#input\_image) | The docker image to use for the container. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The memory value to give to the ecs task. | `number` | `512` | no |
+| <a name="input_schedule_enabled"></a> [schedule\_enabled](#input\_schedule\_enabled) | Whether the EventBridge schedule is enabled. Set to false to deploy the role and task without runs. | `bool` | `true` | no |
 | <a name="input_schedule_expression"></a> [schedule\_expression](#input\_schedule\_expression) | The cron schedule expression for the task. | `string` | n/a | yes |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to use for the service. | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | IDs of the extra security groups you want the task to have access to. | `list(string)` | n/a | yes |
@@ -77,5 +78,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_task_role_name"></a> [task\_role\_name](#output\_task\_role\_name) | Name of the IAM role used by the cron task. Attach extra policies with aws\_iam\_role\_policy\_attachment. |
 <!-- END_TF_DOCS -->
