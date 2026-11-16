@@ -2,9 +2,6 @@
 opentofu = "1.13.9"
 terraform-docs = "latest"
 
-[env]
-MISE_DISABLE_BACKENDS = "aqua,ubi"
-
 [settings]
 experimental = true
 
