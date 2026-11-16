@@ -52,6 +52,7 @@ No modules.
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.log-group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
@@ -69,7 +70,7 @@ No modules.
 | <a name="input_memory"></a> [memory](#input\_memory) | The memory value to give to the ecs task. | `number` | `512` | no |
 | <a name="input_schedule_enabled"></a> [schedule\_enabled](#input\_schedule\_enabled) | Whether the EventBridge schedule is enabled. Set to false to deploy the role and task without runs. | `bool` | `true` | no |
 | <a name="input_schedule_expression"></a> [schedule\_expression](#input\_schedule\_expression) | The cron schedule expression for the task. | `string` | n/a | yes |
-| <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to use for the service. | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to inject into the container. valueFrom must be a full Secrets Manager secret ARN (including the 6-character suffix, optionally followed by :json-key:version-stage:version-id) or an SSM parameter ARN or same-region name. The task role is granted read access to exactly these secrets and nothing else. | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | IDs of the extra security groups you want the task to have access to. | `list(string)` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service. | `string` | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | The subnets to deploy the service in to. | `set(string)` | n/a | yes |
@@ -80,5 +81,6 @@ No modules.
 
 | Name | Description |
 | ---- | ----------- |
+| <a name="output_task_role_arn"></a> [task\_role\_arn](#output\_task\_role\_arn) | ARN of the IAM role used by the cron task (both task role and execution role). |
 | <a name="output_task_role_name"></a> [task\_role\_name](#output\_task\_role\_name) | Name of the IAM role used by the cron task. Attach extra policies with aws\_iam\_role\_policy\_attachment. |
 <!-- END_TF_DOCS -->
