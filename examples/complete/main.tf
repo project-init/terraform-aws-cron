@@ -13,6 +13,7 @@ module "cron" {
   cron_name = "cron"
 
   schedule_expression = "rate(30 minutes)"
+  # schedule_enabled    = false
 
   # ECS Cluster/Service
   ecs_cluster_arn = "ecs_arn"

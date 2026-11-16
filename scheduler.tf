@@ -1,6 +1,7 @@
 resource "aws_scheduler_schedule" "cron" {
   name       = "${var.service_name}-${var.environment}-cron-${var.cron_name}"
   group_name = var.group_name
+  state      = var.schedule_enabled ? "ENABLED" : "DISABLED"
   flexible_time_window {
     mode = "OFF"
   }

@@ -37,6 +37,13 @@ variable "schedule_expression" {
   description = "The cron schedule expression for the task."
 }
 
+variable "schedule_enabled" {
+  type        = bool
+  nullable    = false
+  default     = true
+  description = "Whether the EventBridge schedule is enabled. Set to false to deploy the role and task without runs."
+}
+
 ########################################################################################################################
 ### ECS Cluster/Service
 ########################################################################################################################
@@ -91,7 +98,7 @@ variable "secrets" {
     valueFrom = string
   }))
   default     = []
-  description = "The secrets to use for the service."
+  description = "The secrets to inject into the container. valueFrom must be a full Secrets Manager secret ARN (including the 6-character suffix, optionally followed by :json-key:version-stage:version-id) or an SSM parameter ARN or same-region name. The task role is granted read access to exactly these secrets and nothing else."
 }
 
 variable "image" {

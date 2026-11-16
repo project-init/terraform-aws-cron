@@ -42,6 +42,27 @@ data "aws_iam_policy_document" "policy" {
     ]
   }
 
+  # Read access to exactly the secrets injected into the container via var.secrets
+  dynamic "statement" {
+    for_each = length(local.secretsmanager_arns) > 0 ? [1] : []
+    content {
+      sid       = "ReadInjectedSecretsManagerSecrets"
+      effect    = "Allow"
+      actions   = ["secretsmanager:GetSecretValue"]
+      resources = local.secretsmanager_arns
+    }
+  }
+
+  dynamic "statement" {
+    for_each = length(local.ssm_parameter_arns) > 0 ? [1] : []
+    content {
+      sid       = "ReadInjectedSSMParameters"
+      effect    = "Allow"
+      actions   = ["ssm:GetParameters"]
+      resources = local.ssm_parameter_arns
+    }
+  }
+
   # DLQ Permissions
   statement {
     effect = "Allow"
